@@ -1,0 +1,93 @@
+
+{% extends "student/base.html" %}
+
+{% block content %}
+	<div class = "container" id = "encont">
+		<div class = "container"  id = "encont2">
+			<div class = "row">
+				<div class = "col-md-6">
+					<select id = "studentname">
+					
+						{% if request.session.studentname %}
+						<option selected = "{{ request.session.studentname }}">{{ request.session.studentname }}</option>
+						{% else %}
+						<option selected = "">Select student</option>
+						{% endif %}
+						{% for name in student %}
+						<option value = "{{ name.firstname }}">{{ name.firstname }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class = "col-md-6">
+					<select id = "coursetitle">
+						<option selected = "" >Select course</option>
+						{% for row in course %}
+						<option value = "{{ row.coursetitle }}">{{ row.coursetitle }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div><br/><br/>
+			
+			<button class = "btn btn-sm btn-dark" id = "enroll">Enroll</button>
+		</div><br/><br/>	
+
+		
+		<div class = "container" id = "encont2">
+			<table class = "table">
+				<thead>
+					<tr>
+						<th>Student name</th>
+						<th>Course title</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for row in enrollment %}
+					<tr>
+						<td>{{ row.sname }}</td>
+						<td>{{ row.course }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			
+			</table>
+			
+		</div>
+		
+	</div>
+	
+	<script>
+		$(document).ready(function(){
+			$('#enroll').click(function () {
+				$.ajax({
+					url: "{% url 'saveenrollment' %}", 
+					data: {
+						namestudent: $('#studentname').val(),
+						titlecourse: $('#coursetitle').val()
+					},
+					success: function(){
+						window.location = "{% url 'enrollment' %}"
+					}
+					failure: function() {
+						window.alert("Cannot enroll same student in more than 3 courses")
+					}
+				});
+			});
+			
+			$('#studentname').change(function(){
+				$.ajax({
+					url: "{% url 'saveenrollment' %}", 
+					data: {
+						namestudent: $('#studentname').val(),
+					},
+					success: function(){
+						window.location = "{% url 'enrollment' %}"
+					}
+					
+				});
+			
+			});
+		});
+	</script>
+	
+
+{% endblock %}

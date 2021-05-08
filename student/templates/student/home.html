@@ -1,0 +1,81 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+		<div class = "container">
+			<div class = "jumbotron">
+				<h1>{{ request.session.title }}</h1>
+				<p>BUS 443: {{ name }}</p> <!--calling variable context from views-->
+			</div>
+			
+			<div class="container-fluid">
+
+				  <br>
+				  <div class="card">
+					<div class="card-header">
+					  Number of students 
+					</div>
+					<div class="card-body">
+					  {{ studnum }}
+					</div>
+				  </div>
+				  
+				  <br/>
+				<div class="row">
+				  <div class="col-3">
+					<div class="card">
+					  <div class="card-block">
+						Freshmen: {{ freshman }}
+					  </div>
+					</div>
+				  </div>
+				  <br/>
+				   <div class="col-3">
+					<div class="card">
+					  <div class="card-block">
+						Sophomores: {{ sophomore }}
+					  </div>
+					</div>
+				  </div>
+				  <br/>
+				   <div class="col-3">
+					<div class="card">
+					  <div class="card-block">
+						Juniors: {{ junior }}
+					  </div>
+					</div>
+				  </div>
+				  <br/>
+				   <div class="col-3">
+					<div class="card">
+					  <div class="card-block">
+						Seniors: {{ senior }}
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				  <br>
+				 <div class="card">
+					<div class="card-header">
+					  Number of courses being offered
+					</div>
+					<div class="card-body">
+					  {{ cournum }}
+					</div>
+				</div>
+				  
+				  	  <br>
+				  <div class="card">
+					<div class="card-header">
+					  Average GPA
+					</div>
+					<div class="card-body">
+					  {{ avggpa }}
+					</div>
+				  </div>
+
+				
+		</div>
+{% endblock %}
+
+

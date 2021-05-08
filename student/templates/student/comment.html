@@ -1,0 +1,39 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+
+<div class = "container" id = "encont"> <!--for project do CSS file for style-->
+
+	<h3>Hello {{ request.session.username }}, please enter your comment</h3><br/>
+	<div class = "form-group">
+		<label for = "emailid">Email ID</label>
+		<input type = "email" class = "form-control" id = "emailid" placeholder = "Enter your email"/>
+	</div>
+	<div class = form-group">
+		<label for = "comment">Comment</label>
+		<input type = "text" class = "form-control" id = "comment" placeholder = "Enter comment"/>
+	</div>
+	<button type = "submit" class = "btn btn-primary" id = "btnsubmit">Submit</button>
+</div>
+
+<script>
+	$(document).ready(function(){
+		$('#btnsubmit').click(function(){ 
+			$.ajax({
+				url: "{% url 'savedata' %}",
+				data: {
+					email: $('#emailid').val(),
+					comment: $('#comment').val()
+				},
+				success: function(){
+					console.log("Success");
+				}
+			});
+		});
+		
+	});
+</script>
+
+
+
+{% endblock %}
